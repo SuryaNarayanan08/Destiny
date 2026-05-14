@@ -291,37 +291,32 @@ body{
 
 /* HERO */
 
+/* HERO SECTION */
 
 #page-home{
   position:relative;
   overflow:hidden;
 
-  min-height:100vh;
-
   display:flex;
   justify-content:center;
   align-items:center;
 
-  background:none;
+  isolation:isolate;
 }
 
-/* BLURRED BACKGROUND IMAGE */
+/* BLURRED CINEMATIC BACKGROUND */
 
 #page-home::before{
 
   content:"";
 
   position:absolute;
-  top:0;
-  left:0;
-
-  width:100%;
-  height:100%;
+  inset:0;
 
   background:
     linear-gradient(
-      rgba(43,0,12,0.45),
-      rgba(20,0,10,0.75)
+      rgba(74,14,32,0.35),
+      rgba(74,14,32,0.55)
     ),
     url('images/UmaSurya3.JPG');
 
@@ -329,14 +324,14 @@ body{
   background-position:center;
   background-repeat:no-repeat;
 
-  filter:blur(4px);
+  transform:scale(1.08);
 
-  transform:scale(1.05);
+  filter:blur(3px) brightness(0.7);
 
   z-index:-2;
 }
 
-/* DARK OVERLAY */
+/* GLASS OVERLAY */
 
 #page-home::after{
 
@@ -345,23 +340,40 @@ body{
   position:absolute;
   inset:0;
 
-  background:
-    rgba(0,0,0,0.25);
+  backdrop-filter:blur(2px);
+
+  background:rgba(255,255,255,0.03);
 
   z-index:-1;
 }
-}
+
+/* HERO TEXT */
 
 .hero-title{
   font-family:'Playfair Display',serif;
   font-size:110px;
   color:#D4AF37;
+
+  text-shadow:
+    0 4px 20px rgba(0,0,0,0.7);
 }
 
 .hero-sub{
   font-size:44px;
   margin-top:10px;
   font-family:'Playfair Display',serif;
+
+  text-shadow:
+    0 4px 20px rgba(0,0,0,0.7);
+}
+
+.section-sub{
+  margin-top:20px;
+  line-height:1.9;
+  font-size:18px;
+
+  text-shadow:
+    0 4px 15px rgba(0,0,0,0.6);
 }
 
 /* SCROLL BUTTON */
