@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Surya ❤️ Uma Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Cormorant Garamond',serif;
+  background:#4A0E20;
+  color:#F8EEDB;
+  overflow-x:hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:#140726;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#D4AF37;
+  border-radius:20px;
+}
+
+/* OPENING SCREEN */
+
+#opening-screen{
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:
+    linear-gradient(rgba(74,14,32,0.88), rgba(74,14,32,0.95)),
+    url('images/bg.jpg') center/cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  transition:1.8s ease;
+}
+
+#opening-screen.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+/* MAIN CONTENT */
+
+#main-content{
+  opacity:0;
+  visibility:hidden;
+  transition:1.8s ease;
+}
+
+#main-content.show{
+  opacity:1;
+  visibility:visible;
+}
+
+/* ENVELOPE */
+
+.invitation-envelope{
+  position:relative;
+  width:340px;
+  height:230px;
+  background:#f7ead7;
+  border-radius:18px;
+  cursor:pointer;
+  overflow:hidden;
+
+  box-shadow:
+    0 0 25px rgba(212,175,55,0.5),
+    0 0 60px rgba(212,175,55,0.3);
+
+  animation:floatEnvelope 3s ease-in-out infinite;
+}
+
+@keyframes floatEnvelope{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-12px);
+  }
+
+}
+
+/* FLAP */
+
+.envelope-flap{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#D4AF37;
+  clip-path:polygon(0 0,50% 58%,100% 0);
+  transform-origin:top;
+  transition:1.5s ease;
+  z-index:5;
+}
+
+/* LETTER */
+
+.letter{
+  position:absolute;
+  width:90%;
+  height:84%;
+  left:5%;
+  bottom:5%;
+  background:white;
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:#4A0E20;
+  text-align:center;
+  padding:20px;
+  transform:translateY(40px);
+  transition:1.5s ease;
+}
+
+.letter h2{
+  font-family:'Playfair Display',serif;
+  font-size:38px;
+  color:#D4AF37;
+}
+
+.letter p{
+  margin-top:15px;
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+/* OPEN EFFECT */
+
+.invitation-envelope.open .envelope-flap{
+  transform:rotateX(180deg);
+}
+
+.invitation-envelope.open .letter{
+  transform:translateY(-35px);
+}
+
+/* GOLD FLASH */
+
+.flash{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,
+  rgba(255,215,120,0.95),
+  rgba(255,215,120,0));
+  animation:flashAnim 1s ease forwards;
+  z-index:999999;
+}
+
+@keyframes flashAnim{
+
+  0%{
+    opacity:0;
+    transform:scale(0.5);
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(2);
+  }
+
+}
+
+/* PETALS */
+
+#petals-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:99999;
+}
+
+.petal{
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:radial-gradient(circle,#ffd86b,#D4AF37);
+  border-radius:50% 0 50% 50%;
+  animation:fallPetal linear forwards;
+}
+
+@keyframes fallPetal{
+
+  0%{
+    transform:
+      translateY(-100px)
+      rotate(0deg)
+      scale(0.5);
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+      translateY(110vh)
+      translateX(120px)
+      rotate(720deg)
+      scale(1);
+    opacity:0;
+  }
+
+}
+
+/* SECTIONS */
+
+.section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:80px 10%;
+  position:relative;
+}
+
+.section-content{
+  max-width:900px;
+  width:100%;
+  text-align:center;
+}
+
+/* REVEAL EFFECT */
+
+.reveal{
+  opacity:0;
+  transform:translateY(80px);
+  transition:1.3s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* SHARED */
+
+.divider{
+  color:#D4AF37;
+  font-size:24px;
+  letter-spacing:10px;
+  margin-bottom:25px;
+}
+
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:58px;
+  color:#D4AF37;
+}
+
+.section-sub{
+  margin-top:20px;
+  line-height:1.9;
+  font-size:18px;
+}
+
+/* HERO */
+
+
+#page-home{
+  position:relative;
+  overflow:hidden;
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:none;
+}
+
+/* BLURRED BACKGROUND IMAGE */
+
+#page-home::before{
+
+  content:"";
+
+  position:absolute;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      rgba(43,0,12,0.45),
+      rgba(20,0,10,0.75)
+    ),
+    url('UmaSurya3.jpg');
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  filter:blur(10px);
+
+  transform:scale(1.12);
+
+  z-index:-2;
+}
+
+/* DARK OVERLAY */
+
+#page-home::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    rgba(0,0,0,0.25);
+
+  z-index:-1;
+}
+}
+
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:110px;
+  color:#D4AF37;
+}
+
+.hero-sub{
+  font-size:44px;
+  margin-top:10px;
+  font-family:'Playfair Display',serif;
+}
+
+/* SCROLL BUTTON */
+
+.scroll-down{
+  margin:60px auto 0;
+  width:42px;
+  height:70px;
+  border:2px solid #D4AF37;
+  border-radius:30px;
+  position:relative;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding-top:10px;
+  animation:mouseGlow 2s infinite;
+}
+
+.scroll-down span{
+  width:8px;
+  height:8px;
+  background:#D4AF37;
+  border-radius:50%;
+  animation:scrollBall 1.8s infinite;
+}
+
+@keyframes scrollBall{
+
+  0%{
+    transform:translateY(0);
+    opacity:1;
+  }
+
+  100%{
+    transform:translateY(28px);
+    opacity:0;
+  }
+
+}
+
+@keyframes mouseGlow{
+
+  0%,100%{
+    box-shadow:0 0 10px rgba(212,175,55,0.4);
+  }
+
+  50%{
+    box-shadow:
+      0 0 25px rgba(212,175,55,1),
+      0 0 45px rgba(212,175,55,0.4);
+  }
+
+}
+
+/* SAVE DATE */
+
+.invitation-card{
+  width:380px;
+  margin:50px auto 0;
+  background:linear-gradient(145deg,#fff5e8,#f7ead7);
+  border-radius:28px;
+  padding:60px 30px;
+  position:relative;
+  overflow:hidden;
+  border:3px solid #D4AF37;
+}
+
+.hidden-invite{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1.8s ease;
+  color:#4A0E20;
+}
+
+.hidden-invite.showInvite{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.seal{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  background:radial-gradient(circle,#f3d57d,#D4AF37);
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:40px;
+  color:#4A0E20;
+  cursor:pointer;
+
+  animation:sealGlow 2s infinite;
+
+  transition:1.8s ease;
+}
+
+@keyframes sealGlow{
+
+  0%,100%{
+    box-shadow:0 0 10px rgba(212,175,55,0.4);
+  }
+
+  50%{
+    box-shadow:
+      0 0 30px rgba(212,175,55,1),
+      0 0 60px rgba(212,175,55,0.5);
+  }
+
+}
+
+/* GALLERY */
+
+.gallery{
+  margin-top:50px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.gallery img{
+  width:100%;
+  height:450px;
+
+  object-fit:cover;
+
+  /* MOVES IMAGE DOWN */
+  object-position:center 15%;
+
+  border-radius:24px;
+
+  transition:0.5s ease;
+  cursor:pointer;
+
+  display:block;
+}
+.gallery img:hover{
+  transform:scale(1.03);
+}
+/* VENUE CARD */
+
+/* VENUE CARD */
+
+.venue-card{
+  width:90%;
+  max-width:320px;
+  height:220px;
+
+  margin:40px auto 0;
+
+  position:relative;
+  transform-style:preserve-3d;
+  transition:1s;
+  cursor:pointer;
+}
+
+.venue-card.flip{
+  transform:rotateY(180deg);
+}
+
+.venue-front,
+.venue-back{
+  position:absolute;
+
+  width:100%;
+  height:100%;
+
+  border-radius:24px;
+
+  backface-visibility:hidden;
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  padding:20px;
+}
+
+.venue-front h3,
+.venue-back h3{
+  font-size:26px;
+}
+
+.venue-icon{
+  font-size:42px;
+}
+
+.venue-back p{
+  margin-top:12px;
+  line-height:1.6;
+  font-size:15px;
+}
+
+.map-btn{
+  margin-top:16px;
+  padding:12px 22px;
+  font-size:14px;
+}
+
+.venue-card.flip{
+  transform:rotateY(180deg);
+}
+
+.venue-front,
+.venue-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:28px;
+  backface-visibility:hidden;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+}
+
+.venue-front{
+  background:
+    linear-gradient(145deg,#D4AF37,#f5da87);
+  color:#4A0E20;
+
+  box-shadow:
+    0 0 30px rgba(212,175,55,0.5);
+
+  animation:venueGlow 2.5s infinite;
+}
+
+.venue-front h3{
+  font-size:32px;
+  margin-top:15px;
+}
+
+.venue-icon{
+  font-size:50px;
+}
+
+.venue-back{
+  background:
+    linear-gradient(145deg,#fff5e8,#f7ead7);
+
+  color:#4A0E20;
+  transform:rotateY(180deg);
+  border:3px solid #D4AF37;
+}
+
+.venue-back h3{
+  color:#D4AF37;
+  font-size:32px;
+}
+
+.venue-back p{
+  margin-top:15px;
+  line-height:1.8;
+}
+
+@keyframes venueGlow{
+
+  0%,100%{
+    box-shadow:
+      0 0 15px rgba(212,175,55,0.4);
+  }
+
+  50%{
+    box-shadow:
+      0 0 35px rgba(212,175,55,1),
+      0 0 70px rgba(212,175,55,0.5);
+  }
+
+}
+
+/* MAP BUTTON */
+
+.map-btn{
+  margin-top:20px;
+  display:inline-block;
+  padding:16px 34px;
+  border-radius:50px;
+  text-decoration:none;
+  background:linear-gradient(135deg,#D4AF37,#f5da87);
+  color:#4A0E20;
+  font-weight:bold;
+}
+
+/* FOOTER */
+
+.footer-text{
+  max-width:600px;
+  margin:auto;
+  line-height:2;
+  font-size:20px;
+}
+
+.hash{
+  margin-top:25px;
+  color:#D4AF37;
+  letter-spacing:3px;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.92);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:99999;
+}
+
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:24px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .hero-title{
+    font-size:70px;
+  }
+
+  .hero-sub{
+    font-size:34px;
+  }
+
+  .section-title{
+    font-size:42px;
+  }
+
+  .invitation-envelope{
+    width:290px;
+    height:210px;
+  }
+
+  .letter h2{
+    font-size:32px;
+  }
+
+  .invitation-card{
+    width:100%;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- OPENING SCREEN -->
+
+<div id="opening-screen">
+
+  <div class="invitation-envelope" id="envelope">
+
+    <div class="envelope-flap"></div>
+
+    <div class="letter">
+      <h2>Surya ❤️ Uma</h2>
+      <p>Tap To Open Invitation ✨</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PETALS -->
+
+<div id="petals-container"></div>
+
+<!-- MAIN CONTENT -->
+
+<div id="main-content">
+
+<!-- HOME -->
+
+<section class="section" id="page-home">
+
+  <div class="section-content reveal">
+
+    <div class="divider">✦ ❖ ✧ ❋ ❧ ✦</div>
+
+    <h1 class="hero-title">S & U</h1>
+
+    <h2 class="hero-sub">
+      Surya ❤️ Uma
+    </h2>
+
+    <p class="section-sub">
+      Bound by love and blessed by our families,
+      we invite you to witness the beginning
+      of our forever together.
+    </p>
+
+    <div class="scroll-down" id="scrollBtn">
+      <span></span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SAVE DATE -->
+
+<section class="section" id="page-save-date">
+
+  <div class="section-content reveal">
+
+    <div class="divider">✦ ❖ ✧ ❋ ❧ ✦</div>
+
+    <h2 class="section-title">
+      Save The Date
+    </h2>
+
+    <p class="section-sub">
+      Tap the royal seal to reveal our wedding date ✨
+    </p>
+
+    <div class="invitation-card">
+
+      <div class="seal" id="seal">✦</div>
+
+      <div class="hidden-invite" id="hiddenInvite">
+
+        <h2>June 17, 2026</h2>
+
+        <br>
+
+        <p>
+          Wednesday • Tirunelveli
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section class="section" id="page-gallery">
+
+  <div class="section-content reveal">
+
+    <div class="divider">✦ ❖ ✧ ❋ ❧ ✦</div>
+
+    <h2 class="section-title">
+      Gallery
+    </h2>
+
+    <div class="gallery">
+
+      <img src="images\UmaSurya1.jpeg">
+      <img src="images\UmaSurya2.jpeg">
+    </div>
+
+  </div>
+
+</section>
+
+<!-- VENUE -->
+
+<section class="section" id="page-location">
+
+  <div class="section-content reveal">
+
+    <div class="divider">✦ ❖ ✧ ❋ ❧ ✦</div>
+
+    <h2 class="section-title">
+      Venue & Location
+    </h2>
+
+    <p class="section-sub">
+      The place where our forever begins ✨
+    </p>
+
+    <div class="venue-card" id="venueCard">
+
+      <div class="venue-front">
+
+        <span class="venue-icon">📍</span>
+
+        <h3>Reveal Venue</h3>
+
+        <p>
+          Tap to view wedding hall details
+        </p>
+
+      </div>
+
+      <div class="venue-back">
+
+        <h3>
+          Durga Lakshmi Mahal
+        </h3>
+
+        <p>
+          Chekkadi Stop,<br>
+          Pettai, Tirunelveli
+        </p>
+
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Durga+Lakshmi+Mahal+Chekkadi+Stop+Pettai+Tirunelveli"
+          target="_blank"
+          class="map-btn">
+
+          Open In Maps
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<section class="section" id="page-footer">
+
+  <div class="section-content reveal">
+
+    <div class="divider">✦ ❖ ✧ ❋ ❧ ✦</div>
+
+    <h2 class="section-title">
+      Surya ❤️ Uma
+    </h2>
+
+    <p class="section-sub">
+      June 17, 2026
+    </p>
+
+    <br>
+
+    <p class="footer-text">
+
+      “From strangers to soulmates,
+      every step of our journey
+      has been magical.”
+
+    </p>
+
+    <div class="hash">
+      #SuryaWedsUma
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+  <img src="" alt="">
+</div>
+
+<!-- MUSIC -->
+
+<audio id="bgMusic" preload="auto" loop>
+  <source src="music\Mangalyam-Tantunanena.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* OPEN INVITATION */
+
+const envelope = document.getElementById('envelope');
+const openingScreen = document.getElementById('opening-screen');
+const petalsContainer = document.getElementById('petals-container');
+const mainContent = document.getElementById('main-content');
+
+const music = document.getElementById('bgMusic');
+
+/* INITIAL MUSIC VOLUME */
+
+music.volume = 0;
+
+envelope.addEventListener('click', ()=>{
+
+  envelope.classList.add('open');
+
+  /* PLAY MUSIC */
+
+  music.play().then(()=>{
+
+    let volume = 0;
+
+    const fadeMusic = setInterval(()=>{
+
+      if(volume < 0.5){
+
+        volume += 0.05;
+
+        music.volume = volume;
+
+      }else{
+
+        clearInterval(fadeMusic);
+
+      }
+
+    },200);
+
+  }).catch((error)=>{
+
+    console.log("Music autoplay blocked:", error);
+
+  });
+
+  /* FLASH EFFECT */
+
+  const flash = document.createElement('div');
+
+  flash.classList.add('flash');
+
+  document.body.appendChild(flash);
+
+  setTimeout(()=>{
+    flash.remove();
+  },1000);
+
+  /* PETALS */
+
+  for(let i=0;i<45;i++){
+
+    const petal = document.createElement('div');
+
+    petal.classList.add('petal');
+
+    petal.style.left = Math.random()*100 + 'vw';
+
+    petal.style.animationDuration =
+      (4 + Math.random()*4) + 's';
+
+    petalsContainer.appendChild(petal);
+
+    setTimeout(()=>{
+      petal.remove();
+    },8000);
+
+  }
+
+  /* SHOW CONTENT */
+
+  setTimeout(()=>{
+
+    openingScreen.classList.add('hide');
+
+    mainContent.classList.add('show');
+
+  },2200);
+
+});
+
+/* SCROLL BUTTON */
+
+document.getElementById('scrollBtn')
+.addEventListener('click', ()=>{
+
+  document.getElementById('page-save-date')
+  .scrollIntoView({
+    behavior:'smooth'
+  });
+
+});
+
+/* SCROLL REVEAL */
+
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll(){
+
+  reveals.forEach(el=>{
+
+    const windowHeight = window.innerHeight;
+    const top = el.getBoundingClientRect().top;
+
+    if(top < windowHeight - 100){
+      el.classList.add('active');
+    }
+
+  });
+
+}
+
+window.addEventListener('scroll', revealOnScroll);
+
+revealOnScroll();
+
+/* SAVE DATE */
+
+const seal = document.getElementById('seal');
+const hiddenInvite = document.getElementById('hiddenInvite');
+
+seal.addEventListener('click', ()=>{
+
+  seal.style.pointerEvents = 'none';
+
+  seal.style.transform =
+    'translate(-50%,-50%) scale(5) rotate(360deg)';
+
+  seal.style.opacity = '0';
+
+  setTimeout(()=>{
+
+    seal.style.display = 'none';
+
+    hiddenInvite.classList.add('showInvite');
+
+    setTimeout(()=>{
+
+      document.getElementById('page-gallery')
+        .scrollIntoView({
+          behavior:'smooth'
+        });
+
+    },1500);
+
+  },1800);
+
+});
+
+/* VENUE CARD */
+
+const venueCard = document.getElementById('venueCard');
+
+venueCard.addEventListener('click', ()=>{
+
+  venueCard.classList.toggle('flip');
+
+});
+
+/* LIGHTBOX */
+
+document.querySelectorAll('.gallery img')
+.forEach(img=>{
+
+  img.addEventListener('click', ()=>{
+
+    document.getElementById('lightbox')
+      .style.display = 'flex';
+
+    document.querySelector('.lightbox img')
+      .src = img.src;
+
+  });
+
+});
+
+document.getElementById('lightbox')
+.addEventListener('click', ()=>{
+
+  document.getElementById('lightbox')
+    .style.display = 'none';
+
+});
+
+</script>
+
+</body>
+</html>
