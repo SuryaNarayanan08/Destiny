@@ -293,9 +293,12 @@ body{
 
 /* HERO SECTION */
 
+/* HERO SECTION */
+
 #page-home{
   position:relative;
   overflow:hidden;
+  min-height:100vh;
 
   display:flex;
   justify-content:center;
@@ -304,7 +307,7 @@ body{
   isolation:isolate;
 }
 
-/* BLURRED CINEMATIC BACKGROUND */
+/* BACKGROUND IMAGE */
 
 #page-home::before{
 
@@ -315,8 +318,8 @@ body{
 
   background:
     linear-gradient(
-      rgba(74,14,32,0.35),
-      rgba(74,14,32,0.55)
+      rgba(0,0,0,0.35),
+      rgba(0,0,0,0.45)
     ),
     url('images/UmaSurya3.JPG');
 
@@ -324,11 +327,26 @@ body{
   background-position:center;
   background-repeat:no-repeat;
 
-  transform:scale(1.08);
+  filter:blur(2px) brightness(0.72);
 
-  filter:blur(3px) brightness(0.7);
+  transform:scale(1.03);
 
   z-index:-2;
+}
+
+/* EXTRA DARK OVERLAY */
+
+#page-home::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    rgba(0,0,0,0.18);
+
+  z-index:-1;
 }
 
 /* GLASS OVERLAY */
