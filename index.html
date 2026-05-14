@@ -339,21 +339,6 @@ body{
   position:absolute;
   inset:0;
 
-  background:
-    rgba(0,0,0,0.18);
-
-  z-index:-1;
-}
-
-/* GLASS OVERLAY */
-
-#page-home::after{
-
-  content:"";
-
-  position:absolute;
-  inset:0;
-
   backdrop-filter:blur(0.5px);
 
   background:rgba(255,255,255,0.03);
@@ -443,57 +428,79 @@ body{
 
 }
 
-/* SAVE DATE */
+/* ── SAVE DATE ── */
 
 .invitation-card{
   width:380px;
   margin:50px auto 0;
   background:linear-gradient(145deg,#fff5e8,#f7ead7);
   border-radius:28px;
-  padding:60px 30px;
+
+  /* enough room so card doesn't collapse when seal disappears */
+  min-height:260px;
+  padding:50px 30px;
+
   position:relative;
-  overflow:hidden;
+  overflow:visible;       /* let seal sit centred without clipping */
   border:3px solid #D4AF37;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.hidden-invite{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1.8s ease;
-  color:#4A0E20;
-}
-
-.hidden-invite.showInvite{
-  display:block
-  opacity:1;
-  transform:translateY(0);
-}
-
+/* SEAL – absolutely centred inside the card */
 .seal{
   width:100px;
   height:100px;
   border-radius:50%;
   background:radial-gradient(circle,#f3d57d,#D4AF37);
+
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
+
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:40px;
   color:#4A0E20;
   cursor:pointer;
-  animation:sealGlow 2s infinite;
-  transition:0.8s ease;
-  z-index: 10;
 
-}.seal.hidden {
-  display: none;
+  animation:sealGlow 2s infinite;
+  transition:transform 0.8s ease, opacity 0.8s ease;
+  z-index:10;
 }
 
-.invitation-card {
-  min-height: 200px; /* prevent card from collapsing when seal hides */
+/* JS adds this class to hide the seal after click */
+.seal.hidden{
+  display:none;
+}
+
+/* HIDDEN INVITE – invisible by default */
+.hidden-invite{
+  display:none;          /* hidden until JS reveals it */
+  color:#4A0E20;
+  text-align:center;
+  width:100%;
+}
+
+/* JS adds this class to show the invite */
+.hidden-invite.showInvite{
+  display:block;
+  animation:fadeIn 1s ease;
+}
+
+.hidden-invite h2{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  color:#4A0E20;
+}
+
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(20px); }
+  to{   opacity:1; transform:translateY(0);    }
 }
 
 @keyframes sealGlow{
@@ -524,8 +531,6 @@ body{
   height:450px;
 
   object-fit:cover;
-
-  /* MOVES IMAGE DOWN */
   object-position:center 15%;
 
   border-radius:24px;
@@ -538,7 +543,6 @@ body{
 .gallery img:hover{
   transform:scale(1.03);
 }
-/* VENUE CARD */
 
 /* VENUE CARD */
 
@@ -566,70 +570,25 @@ body{
   width:100%;
   height:100%;
 
-  border-radius:24px;
-
-  backface-visibility:hidden;
-  overflow:hidden;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-
-  text-align:center;
-
-  padding:20px;
-}
-
-.venue-front h3,
-.venue-back h3{
-  font-size:26px;
-}
-
-.venue-icon{
-  font-size:42px;
-}
-
-.venue-back p{
-  margin-top:12px;
-  line-height:1.6;
-  font-size:15px;
-}
-
-.map-btn{
-  margin-top:16px;
-  padding:12px 22px;
-  font-size:14px;
-}
-
-.venue-card.flip{
-  transform:rotateY(180deg);
-}
-
-.venue-front,
-.venue-back{
-  position:absolute;
-  width:100%;
-  height:100%;
   border-radius:28px;
+
   backface-visibility:hidden;
   overflow:hidden;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+
   text-align:center;
+
   padding:30px;
 }
 
 .venue-front{
-  background:
-    linear-gradient(145deg,#D4AF37,#f5da87);
+  background:linear-gradient(145deg,#D4AF37,#f5da87);
   color:#4A0E20;
-
-  box-shadow:
-    0 0 30px rgba(212,175,55,0.5);
-
+  box-shadow:0 0 30px rgba(212,175,55,0.5);
   animation:venueGlow 2.5s infinite;
 }
 
@@ -643,9 +602,7 @@ body{
 }
 
 .venue-back{
-  background:
-    linear-gradient(145deg,#fff5e8,#f7ead7);
-
+  background:linear-gradient(145deg,#fff5e8,#f7ead7);
   color:#4A0E20;
   transform:rotateY(180deg);
   border:3px solid #D4AF37;
@@ -664,8 +621,7 @@ body{
 @keyframes venueGlow{
 
   0%,100%{
-    box-shadow:
-      0 0 15px rgba(212,175,55,0.4);
+    box-shadow:0 0 15px rgba(212,175,55,0.4);
   }
 
   50%{
@@ -831,21 +787,24 @@ body{
 
       <div class="seal" id="seal">✦</div>
 
-       <div class="hidden-invite" id="hiddenInvite">
+      <div class="hidden-invite" id="hiddenInvite">
 
-      <h2>June 17, 2026</h2>
+        <h2>June 17, 2026</h2>
 
-      <div style="margin-top:15px;font-size:20px;">
-        ⏰ 9:00 AM – 10:30 AM
-      </div>
+        <div style="margin-top:15px;font-size:20px;">
+          ⏰ 9:00 AM – 10:30 AM
+        </div>
 
-      <p style="margin-top:10px;">
-        Sacred rituals at temple followed by ceremonies
-      </p>
-      <br>
-      <p style="margin-top:10px;">
-        Wednesday • Tirunelveli
-      </p>
+        <p style="margin-top:10px;">
+          Sacred rituals at temple followed by ceremonies
+        </p>
+
+        <br>
+
+        <p style="margin-top:10px;">
+          Wednesday • Tirunelveli
+        </p>
+
       </div>
 
     </div>
@@ -868,8 +827,9 @@ body{
 
     <div class="gallery">
 
-      <img src="images\UmaSurya1.jpeg">
-      <img src="images\UmaSurya2.jpeg">
+      <img src="images/UmaSurya1.jpeg" alt="Uma and Surya">
+      <img src="images/UmaSurya2.jpeg" alt="Uma and Surya">
+
     </div>
 
   </div>
@@ -954,9 +914,9 @@ body{
 
     <p class="footer-text">
 
-      “From strangers to soulmates,
+      "From strangers to soulmates,
       every step of our journey
-      has been magical.”
+      has been magical."
 
     </p>
 
@@ -979,203 +939,135 @@ body{
 <!-- MUSIC -->
 
 <audio id="bgMusic" preload="auto" loop>
-  <source src="music\Mangalyam-Tantunanena.mp3" type="audio/mpeg">
+  <source src="music/Mangalyam-Tantunanena.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* OPEN INVITATION */
+/* ── OPEN INVITATION ── */
 
-const envelope = document.getElementById('envelope');
-const openingScreen = document.getElementById('opening-screen');
-const petalsContainer = document.getElementById('petals-container');
-const mainContent = document.getElementById('main-content');
-
-const music = document.getElementById('bgMusic');
-
-/* INITIAL MUSIC VOLUME */
+const envelope       = document.getElementById('envelope');
+const openingScreen  = document.getElementById('opening-screen');
+const petalsContainer= document.getElementById('petals-container');
+const mainContent    = document.getElementById('main-content');
+const music          = document.getElementById('bgMusic');
 
 music.volume = 0;
 
-envelope.addEventListener('click', ()=>{
+envelope.addEventListener('click', () => {
 
   envelope.classList.add('open');
 
   /* PLAY MUSIC */
-
-  music.play().then(()=>{
+  music.play().then(() => {
 
     let volume = 0;
 
-    const fadeMusic = setInterval(()=>{
-
+    const fadeMusic = setInterval(() => {
       if(volume < 0.5){
-
         volume += 0.05;
-
         music.volume = volume;
-
-      }else{
-
+      } else {
         clearInterval(fadeMusic);
-
       }
+    }, 200);
 
-    },200);
-
-  }).catch((error)=>{
-
-    console.log("Music autoplay blocked:", error);
-
-  });
+  }).catch(err => console.log("Music autoplay blocked:", err));
 
   /* FLASH EFFECT */
-
   const flash = document.createElement('div');
-
   flash.classList.add('flash');
-
   document.body.appendChild(flash);
-
-  setTimeout(()=>{
-    flash.remove();
-  },1000);
+  setTimeout(() => flash.remove(), 1000);
 
   /* PETALS */
-
-  for(let i=0;i<45;i++){
-
+  for(let i = 0; i < 45; i++){
     const petal = document.createElement('div');
-
     petal.classList.add('petal');
-
-    petal.style.left = Math.random()*100 + 'vw';
-
-    petal.style.animationDuration =
-      (4 + Math.random()*4) + 's';
-
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = (4 + Math.random() * 4) + 's';
     petalsContainer.appendChild(petal);
-
-    setTimeout(()=>{
-      petal.remove();
-    },8000);
-
+    setTimeout(() => petal.remove(), 8000);
   }
 
-  /* SHOW CONTENT */
-
-  setTimeout(()=>{
-
+  /* SHOW MAIN CONTENT */
+  setTimeout(() => {
     openingScreen.classList.add('hide');
-
     mainContent.classList.add('show');
-
-  },2200);
-
-});
-
-/* SCROLL BUTTON */
-
-document.getElementById('scrollBtn')
-.addEventListener('click', ()=>{
-
-  document.getElementById('page-save-date')
-  .scrollIntoView({
-    behavior:'smooth'
-  });
+  }, 2200);
 
 });
 
-/* SCROLL REVEAL */
+/* ── SCROLL BUTTON ── */
+
+document.getElementById('scrollBtn').addEventListener('click', () => {
+  document.getElementById('page-save-date').scrollIntoView({ behavior: 'smooth' });
+});
+
+/* ── SCROLL REVEAL ── */
 
 const reveals = document.querySelectorAll('.reveal');
 
 function revealOnScroll(){
-
-  reveals.forEach(el=>{
-
-    const windowHeight = window.innerHeight;
+  reveals.forEach(el => {
     const top = el.getBoundingClientRect().top;
-
-    if(top < windowHeight - 100){
+    if(top < window.innerHeight - 100){
       el.classList.add('active');
     }
-
   });
-
 }
 
 window.addEventListener('scroll', revealOnScroll);
-
 revealOnScroll();
 
-/* SAVE DATE */
+/* ── SAVE DATE SEAL ── */
 
-const seal = document.getElementById('seal');
-const hiddenInvite = document.getElementById('hiddenInvite');
+const seal        = document.getElementById('seal');
+const hiddenInvite= document.getElementById('hiddenInvite');
 
-seal.addEventListener('click', ()=>{
+seal.addEventListener('click', () => {
 
+  /* Disable further clicks immediately */
   seal.style.pointerEvents = 'none';
 
-  seal.style.transform =
-    'translate(-50%,-50%) scale(5) rotate(360deg)';
+  /* Animate the seal away */
+  seal.style.transform = 'translate(-50%,-50%) scale(5) rotate(360deg)';
+  seal.style.opacity   = '0';
 
-  seal.style.opacity = '0';
+  setTimeout(() => {
 
-  setTimeout(()=>{
+    /* Fully hide seal so it can't block the content */
+    seal.classList.add('hidden');
 
-    seal.style.display = 'none';
-    this.classList.add('hidden')
-
+    /* Reveal the invite content */
     hiddenInvite.classList.add('showInvite');
 
-    setTimeout(()=>{
+    /* Auto-scroll to gallery after a moment */
+    setTimeout(() => {
+      document.getElementById('page-gallery').scrollIntoView({ behavior: 'smooth' });
+    }, 1500);
 
-      document.getElementById('page-gallery')
-        .scrollIntoView({
-          behavior:'smooth'
-        });
-
-    },1500);
-
-  },1800);
+  }, 800);   /* slightly faster than transition so display:none fires after fade */
 
 });
 
-/* VENUE CARD */
+/* ── VENUE CARD FLIP ── */
 
-const venueCard = document.getElementById('venueCard');
-
-venueCard.addEventListener('click', ()=>{
-
-  venueCard.classList.toggle('flip');
-
+document.getElementById('venueCard').addEventListener('click', () => {
+  document.getElementById('venueCard').classList.toggle('flip');
 });
 
-/* LIGHTBOX */
+/* ── LIGHTBOX ── */
 
-document.querySelectorAll('.gallery img')
-.forEach(img=>{
-
-  img.addEventListener('click', ()=>{
-
-    document.getElementById('lightbox')
-      .style.display = 'flex';
-
-    document.querySelector('.lightbox img')
-      .src = img.src;
-
+document.querySelectorAll('.gallery img').forEach(img => {
+  img.addEventListener('click', () => {
+    document.getElementById('lightbox').style.display = 'flex';
+    document.querySelector('.lightbox img').src = img.src;
   });
-
 });
 
-document.getElementById('lightbox')
-.addEventListener('click', ()=>{
-
-  document.getElementById('lightbox')
-    .style.display = 'none';
-
+document.getElementById('lightbox').addEventListener('click', () => {
+  document.getElementById('lightbox').style.display = 'none';
 });
 
 </script>
