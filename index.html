@@ -488,6 +488,12 @@ body{
   transition:0.8s ease;
   z-index: 10;
 
+}.seal.hidden {
+  display: none;
+}
+
+.invitation-card {
+  min-height: 200px; /* prevent card from collapsing when seal hides */
 }
 
 @keyframes sealGlow{
@@ -1120,6 +1126,7 @@ seal.addEventListener('click', ()=>{
   setTimeout(()=>{
 
     seal.style.display = 'none';
+    this.classList.add('hidden')
 
     hiddenInvite.classList.add('showInvite');
 
