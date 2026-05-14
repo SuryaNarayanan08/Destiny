@@ -291,10 +291,65 @@ body{
 
 /* HERO */
 
+
 #page-home{
+  position:relative;
+  overflow:hidden;
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:none;
+}
+
+/* BLURRED BACKGROUND IMAGE */
+
+#page-home::before{
+
+  content:"";
+
+  position:absolute;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
   background:
-    linear-gradient(rgba(30,16,60,0.75), rgba(30,16,60,0.92)),
-    url('images/bg.jpg') center/cover;
+    linear-gradient(
+      rgba(43,0,12,0.45),
+      rgba(20,0,10,0.75)
+    ),
+    url('UmaSurya3.jpg');
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  filter:blur(10px);
+
+  transform:scale(1.12);
+
+  z-index:-2;
+}
+
+/* DARK OVERLAY */
+
+#page-home::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    rgba(0,0,0,0.25);
+
+  z-index:-1;
+}
 }
 
 .hero-title{
